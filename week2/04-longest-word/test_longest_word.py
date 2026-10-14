@@ -1,4 +1,8 @@
-from longest_word import longest_word, longest_words
+from longest_word import longest_word
+try:
+    from longest_word import longest_words
+except ImportError:
+    longest_words = None
 
 core_total = 0
 core_fail = 0
@@ -47,10 +51,13 @@ if core_fail == 0:
     print("BIM!!!")
 
 # ── bonus (return all tied words) ─────────────────────────────────────────────
-check("bonus: all 3 tie",            longest_words("cat bat rat"),                     ["cat", "bat", "rat"],  bonus=True)
-check("bonus: two tied for longest", longest_words("the quick brown fox"),             ["quick", "brown"],     bonus=True)
-check("bonus: single winner",        longest_words("hi there"),                        ["there"],              bonus=True)
-check("bonus: empty input",          longest_words(""),                                [],                     bonus=True)
-check("bonus: multiple spaces",      longest_words("the   quick   fox"),               ["quick"],              bonus=True)
+if longest_words is None or longest_words("cat bat rat") is None:
+    print("\nbonus: skipped (longest_words not implemented)")
+else:
+    check("bonus: all 3 tie",            longest_words("cat bat rat"),                     ["cat", "bat", "rat"],  bonus=True)
+    check("bonus: two tied for longest", longest_words("the quick brown fox"),             ["quick", "brown"],     bonus=True)
+    check("bonus: single winner",        longest_words("hi there"),                        ["there"],              bonus=True)
+    check("bonus: empty input",          longest_words(""),                                [],                     bonus=True)
+    check("bonus: multiple spaces",      longest_words("the   quick   fox"),               ["quick"],              bonus=True)
 
-print(f"\nbonus: {bonus_total - bonus_fail}/{bonus_total} passed")
+    print(f"\nbonus: {bonus_total - bonus_fail}/{bonus_total} passed")

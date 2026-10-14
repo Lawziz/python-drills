@@ -31,8 +31,7 @@ Rules:
 - at least one special character
 
 ## Assumptions
-- special character = any character that is not a letter, digit, or whitespace (`!@#$%^&*` etc.)
-- a space is **not** a special character
+- special character = any character that is not a letter, digit, or whitespace
 - functions return `bool` — do not print
 - `is_valid_password` uses the five helper functions; don't duplicate the checks
 

@@ -14,13 +14,6 @@ Given a list of numbers, sort it so the most frequent elements come first. If tw
 | `[5]` | `[5]` | single element |
 | `[]` | `[]` | empty list |
 
-## Frequency Table for First Example
-| value | frequency |
-|---|---|
-| 4 | 3 |
-| 5 | 2 |
-| 6 | 1 |
-
 ## Assumptions
 - sort by **descending** frequency (highest count first)
 - ties in frequency → **ascending** value (smaller number first)
@@ -31,5 +24,4 @@ Given a list of numbers, sort it so the most frequent elements come first. If tw
 Once you have each element's frequency, what two-value key would let you sort by frequency descending and value ascending at the same time?
 
 ## Bonus
-- make it work for a list of strings, not just numbers
-- handle the case where all elements are unique (every frequency is 1)
+- make it work for a list of strings (using alphabetical order for ties), not just numbers

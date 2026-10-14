@@ -3,17 +3,23 @@
 ## Problem
 Write a guessing game: pick a random number between 1 and 100, ask the user to guess, give feedback until they get it right, then print how many valid guesses it took.
 
+## Function Signatures
+`play_game(target=None, max_attempts=None)`
+
+- `target`: optional `int` secret number (defaults to a random integer from 1 to 100)
+- `max_attempts`: optional `int` for the bonus
+
 ## How to Run
 ```
 python number_guessing_game.py
 ```
 
 ## Requirements
-- pick a random integer between 1 and 100 (inclusive) at the start
+- pick a random integer between 1 and 100 (inclusive) at the start (unless `target` is provided)
 - loop until the user guesses correctly
 - on each guess, print `"too high"`, `"too low"`, or `"correct! you got it in X guesses"`
 - count only **valid** guesses toward the total
-- invalid input (non-integer, decimal, empty string, number outside 1–100) must print an error and ask again — do not crash, do not count it
+- invalid input (non-integer, decimal, empty string, number outside 1–100) must print an error (e.g. `"invalid input"`) and ask again — do not crash, do not count it
 
 ## Example Session
 ```
@@ -28,8 +34,7 @@ guess a number between 1 and 100: 37
 ```
 
 ## Assumptions
-- valid guess = a whole number in range 1–100 inclusive
-- decimals like `3.5` are invalid (not a whole number)
+- valid guess = an integer in range 1–100 inclusive
 - the game runs until the user wins — no forced exit
 
 ## Hint

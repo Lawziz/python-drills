@@ -1,8 +1,11 @@
 from password_validator import (
     has_min_length, has_uppercase, has_lowercase,
     has_digit, has_special, is_valid_password,
-    get_failed_requirements,
 )
+try:
+    from password_validator import get_failed_requirements
+except ImportError:
+    get_failed_requirements = None
 
 # special = any char that is not alphanumeric or whitespace
 # get_failed_requirements order: min_length, uppercase, lowercase, digit, special
@@ -76,21 +79,24 @@ if core_fail == 0:
     print("BIM!!!")
 
 # ── get_failed_requirements (bonus) ──────────────────────────────────────────
-check("no failures",              get_failed_requirements("Hello@12"),
-      [],                                                                      bonus=True)
-check("missing uppercase",        get_failed_requirements("hello@12"),
-      ["uppercase"],                                                            bonus=True)
-check("missing lowercase",        get_failed_requirements("HELLO@12"),
-      ["lowercase"],                                                            bonus=True)
-check("missing digit",            get_failed_requirements("Hello@ab"),
-      ["digit"],                                                                bonus=True)
-check("missing special",          get_failed_requirements("Hello123"),
-      ["special"],                                                              bonus=True)
-check("too short only",           get_failed_requirements("Hi@1"),
-      ["min_length"],                                                           bonus=True)
-check("all fail: empty string",   get_failed_requirements(""),
-      ["min_length","uppercase","lowercase","digit","special"],                 bonus=True)
-check("space not special (trap)", get_failed_requirements("Hello 12"),
-      ["special"],                                                              bonus=True)
+if get_failed_requirements is None or get_failed_requirements("Hello@12") is None:
+    print("\nbonus: skipped (get_failed_requirements not implemented)")
+else:
+    check("no failures",              get_failed_requirements("Hello@12"),
+          [],                                                                      bonus=True)
+    check("missing uppercase",        get_failed_requirements("hello@12"),
+          ["uppercase"],                                                            bonus=True)
+    check("missing lowercase",        get_failed_requirements("HELLO@12"),
+          ["lowercase"],                                                            bonus=True)
+    check("missing digit",            get_failed_requirements("Hello@ab"),
+          ["digit"],                                                                bonus=True)
+    check("missing special",          get_failed_requirements("Hello123"),
+          ["special"],                                                              bonus=True)
+    check("too short only",           get_failed_requirements("Hi@1"),
+          ["min_length"],                                                           bonus=True)
+    check("all fail: empty string",   get_failed_requirements(""),
+          ["min_length","uppercase","lowercase","digit","special"],                 bonus=True)
+    check("space not special (trap)", get_failed_requirements("Hello 12"),
+          ["special"],                                                              bonus=True)
 
-print(f"\nbonus: {bonus_total - bonus_fail}/{bonus_total} passed")
+    print(f"\nbonus: {bonus_total - bonus_fail}/{bonus_total} passed")

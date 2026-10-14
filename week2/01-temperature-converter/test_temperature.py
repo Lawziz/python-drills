@@ -80,6 +80,7 @@ error_tests = [
     ("abc", "celsius", "fahrenheit"),       # non-numeric
     (None, "celsius", "fahrenheit"),
     (True, "celsius", "fahrenheit"),        # True is not a temperature
+    (False, "celsius", "fahrenheit"),       # False is not a temperature
 ]
 
 failures = 0

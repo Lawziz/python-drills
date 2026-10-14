@@ -45,8 +45,14 @@ if core_fail == 0:
     print("BIM!!!")
 
 # ── bonus (case-insensitive) ──────────────────────────────────────────────────
-check("case-insensitive aAbBc",    first_non_repeating("aAbBc", case_sensitive=False), "c",  bonus=True)
-check("case-insensitive Aa",       first_non_repeating("Aa", case_sensitive=False),    None, bonus=True)
-check("case-insensitive aabb",     first_non_repeating("aabb", case_sensitive=False),  None, bonus=True)
-
-print(f"\nbonus: {bonus_total - bonus_fail}/{bonus_total} passed")
+try:
+    res_bonus = first_non_repeating("aAbBc", case_sensitive=False)
+    if res_bonus is None and first_non_repeating("aAbBc") != "a":
+        print("\nbonus: skipped (not implemented)")
+    else:
+        check("case-insensitive aAbBc",    res_bonus,                                          "c",  bonus=True)
+        check("case-insensitive Aa",       first_non_repeating("Aa", case_sensitive=False),    None, bonus=True)
+        check("case-insensitive aabb",     first_non_repeating("aabb", case_sensitive=False),  None, bonus=True)
+        print(f"\nbonus: {bonus_total - bonus_fail}/{bonus_total} passed")
+except TypeError:
+    print("\nbonus: skipped (case_sensitive parameter not supported)")

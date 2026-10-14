@@ -10,7 +10,7 @@ Given a sentence, return the longest word. If two words tie, return the first on
 | input | output | why |
 |---|---|---|
 | `"the quick brown fox"` | `"quick"` | 5 chars, longest |
-| `"hi there"` | `"there"` | tie goes to first (`"there"` is longer than `"hi"`, not a tie) |
+| `"hi there"` | `"there"` | `"there"` is 5 chars, `"hi"` is 2 chars |
 | `"cat bat rat"` | `"cat"` | all 3 chars — first encountered wins |
 | `"hello, world"` | `"hello"` | punctuation stripped before measuring |
 | `""` | `""` | empty input, empty output |
@@ -23,8 +23,14 @@ Given a sentence, return the longest word. If two words tie, return the first on
 - a token that becomes empty after stripping (e.g. `"---"`) is ignored
 
 ## Hint
-How would you remove punctuation characters from the start and end of a string without importing anything?
+How would you remove characters from just the beginning and end of a string in Python?
 
 ## Bonus
-- handle multiple spaces between words
-- return all words tied for longest as a list instead of just the first
+`longest_words(sentence) -> list[str]`
+
+Return all words tied for the longest length as a list, preserving their original order of appearance. Return `[]` if there are no words.
+
+```python
+longest_words("cat bat rat")          # → ["cat", "bat", "rat"]
+longest_words("the quick brown fox")  # → ["quick", "brown"]
+```
