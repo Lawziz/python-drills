@@ -29,7 +29,7 @@ To complete this drill, your solution must pass both parts:
    - do not modify the original list
 2. **Part 2 — Algorithmic Efficiency**:
    - **Time complexity:** average $O(n)$ time.
-   - **Constraint:** do not sort the list (`sorted` and `.sort()` are $O(n \log n)$). Achieve average $O(n)$ time using a set lookup approach.
+   - **Constraint:** do not sort the list (`sorted` and `.sort()` are `O(n log n)`). Achieve average $O(n)$ time using a set lookup approach.
 
 ## Assumptions
 - numbers are integers (positive, negative, or zero)
