@@ -15,8 +15,17 @@ Given a string, return the first character that appears exactly once. If no such
 | `"aAbBc"` | `"a"` | `'a'` and `'A'` are different characters; `'a'` appears once |
 | `""` | `None` | empty string |
 
+### With `case_sensitive=False`
+| input | output | why |
+|---|---|---|
+| `"aAbBc"` | `"c"` | counted as `"aabbc"`: `a` ×2, `b` ×2, `c` ×1 |
+| `"sTreSS"` | `"T"` | counted as `"stress"`: first unique is `t`, but the input has `'T'`, so return `"T"` |
+| `"Aa"` | `None` | counted as `"aa"`: the letter repeats |
+
 ## Assumptions
 - case-sensitive by default (`case_sensitive=True`): `'A'` and `'a'` are treated as different characters
+- when `case_sensitive=False`, case is ignored **only for counting**: `'A'` and `'a'` count as the same character
+- the returned character is always **exactly as it appears in the original string**, never a lowercased version (`"sTreSS"` returns `"T"`, not `"t"`)
 - return the first non-repeating character by **position in the original string**, not alphabetically
 - return `None` (not `""`, not `"None"`) when none exists
 
