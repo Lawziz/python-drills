@@ -1,5 +1,7 @@
 # Solving Password Validator in Python
 
+## What we're building
+
 A password is only useful if it's hard to guess. Many websites enforce rules to make sure of that.
 
 In this exercise, a password is valid only if it follows all `five` of these rules:
