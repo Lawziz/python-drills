@@ -143,5 +143,3 @@ print(fizzbuzz(0))   # []
 - `%` gives the remainder, and a remainder of 0 means divisible.
 - In an `if ... elif` chain, Python stops at the first true condition, so check "both" first.
 - Return the list. Don't print it.
-
-
