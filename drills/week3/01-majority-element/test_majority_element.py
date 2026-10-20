@@ -65,9 +65,10 @@ if part1_fail > 0:
 else:
     print("\nPart 2 (Algorithmic Efficiency):")
     
-    # 1. Time complexity check: 100k items must complete in < 1.0s
+    # 1. Time complexity check: 30k items with majority at the end must complete in < 1.0s
     part2_total += 1
-    large_list = [42] * 50001 + [1] * 49999
+    # Place majority element at the end so O(n^2) nested loops / count() cannot short-circuit on the first item
+    large_list = [1] * 14999 + [42] * 15001
     start_time = time.perf_counter()
     ans_time = majority_element(large_list)
     elapsed = time.perf_counter() - start_time
@@ -84,27 +85,30 @@ else:
         print(f"  [PASS] time complexity: {elapsed:.3f}s (< 1.0s, O(n) verified)")
 
     # 2. Space complexity check: must use O(1) auxiliary space (< 50 KB peak allocation)
-    part2_total += 1
-    # 50,000 distinct values + 50,001 majority values
-    stress_data = list(range(50000)) + [999999] * 50001
-    
-    tracemalloc.start()
-    ans_space = majority_element(stress_data)
-    _, peak_bytes = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
-
-    peak_kb = peak_bytes / 1024
-    if ans_space != 999999:
-        part2_fail += 1
-        print("FAIL [space: stress test correctness]")
-        print(f"  expected: 999999, got: {ans_space!r}\n")
-    elif peak_bytes > 50 * 1024:
-        part2_fail += 1
-        print("FAIL [space: O(1) auxiliary space requirement]")
-        print(f"  peak memory allocated: {peak_kb:.1f} KB (limit: 50.0 KB)")
-        print("  A dictionary/hash map was detected. Refactor to O(1) space using the Boyer–Moore Voting Algorithm!\n")
+    if part2_fail > 0:
+        print("  [SKIP] space complexity check skipped (fix time complexity first)")
     else:
-        print(f"  [PASS] space complexity: {peak_kb:.1f} KB (< 50.0 KB, O(1) auxiliary space verified)")
+        part2_total += 1
+        # 50,000 distinct values + 50,001 majority values
+        stress_data = list(range(50000)) + [999999] * 50001
+        
+        tracemalloc.start()
+        ans_space = majority_element(stress_data)
+        _, peak_bytes = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+
+        peak_kb = peak_bytes / 1024
+        if ans_space != 999999:
+            part2_fail += 1
+            print("FAIL [space: stress test correctness]")
+            print(f"  expected: 999999, got: {ans_space!r}\n")
+        elif peak_bytes > 50 * 1024:
+            part2_fail += 1
+            print("FAIL [space: O(1) auxiliary space requirement]")
+            print(f"  peak memory allocated: {peak_kb:.1f} KB (limit: 50.0 KB)")
+            print("  A dictionary/hash map was detected. Refactor to O(1) space using the Boyer–Moore Voting Algorithm!\n")
+        else:
+            print(f"  [PASS] space complexity: {peak_kb:.1f} KB (< 50.0 KB, O(1) auxiliary space verified)")
 
     print(f"\nPart 2 result: {part2_total - part2_fail}/{part2_total} passed")
 
